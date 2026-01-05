@@ -18,6 +18,9 @@ const memoryRoutes = require('./routes/memoryRoutes');
 const cookbookRoutes = require('./routes/cookbookRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
 
+// API version
+const apiVersion = process.env.API_VERSION || '/api/v1';
+
 // Trust proxy
 app.set('trust proxy', 1);
 
@@ -116,19 +119,15 @@ app.get('/', (req, res) => {
     endpoints: {
       health: '/health',
       status: '/api/status',
-      recipes: '/api/v1/recipes',
-      memories: '/api/v1/memories',
-      cookbook: '/api/v1/cookbook',
-      feedback: '/api/v1/feedback',
+      recipes: `${apiVersion}/recipes`,
+      memories: `${apiVersion}/memories`,
+      cookbook: `${apiVersion}/cookbook`,
+      feedback: `${apiVersion}/feedback`,
     },
   });
 });
 
-console.log('recipes:', typeof recipeRoutes, recipeRoutes);
-console.log('memories:', typeof memoryRoutes, memoryRoutes);
-console.log('cookbook:', typeof cookbookRoutes, cookbookRoutes);
-console.log('feedback:', typeof feedbackRoutes, feedbackRoutes);
-
+// API Routes
 app.use(`${apiVersion}/recipes`, recipeRoutes);
 app.use(`${apiVersion}/memories`, memoryRoutes);
 app.use(`${apiVersion}/cookbook`, cookbookRoutes);

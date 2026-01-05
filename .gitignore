@@ -1,7 +1,8 @@
 # Dependencies
 node_modules/
 package-lock.json
-
+# Firebase private key (VERY IMPORTANT)
+firebaseKey.json
 # Environment variables
 .env
 .env.local
