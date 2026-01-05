@@ -17,6 +17,7 @@ const recipeRoutes = require('./routes/recipeRoutes');
 const memoryRoutes = require('./routes/memoryRoutes');
 const cookbookRoutes = require('./routes/cookbookRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 // API version
 const apiVersion = process.env.API_VERSION || '/api/v1';
@@ -123,6 +124,8 @@ app.get('/', (req, res) => {
       memories: `${apiVersion}/memories`,
       cookbook: `${apiVersion}/cookbook`,
       feedback: `${apiVersion}/feedback`,
+      auth: `${apiVersion}/auth`
+
     },
   });
 });
@@ -132,6 +135,8 @@ app.use(`${apiVersion}/recipes`, recipeRoutes);
 app.use(`${apiVersion}/memories`, memoryRoutes);
 app.use(`${apiVersion}/cookbook`, cookbookRoutes);
 app.use(`${apiVersion}/feedback`, feedbackRoutes);
+app.use(apiVersion + '/auth', authRoutes); // <-- here, not inside JSON
+
 
 // 404 handler
 app.use(notFound);
